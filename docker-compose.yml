@@ -1,0 +1,18 @@
+# docker-compose up --build --force-recreate --renew-anon-volumes
+
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:5.0.6
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pwdfoo111
+      MONGO_INITDB_DATABASE: demo
+  mongo-seed:
+    build: ./mongodb-seed
+    depends_on:
+      - mongodb
